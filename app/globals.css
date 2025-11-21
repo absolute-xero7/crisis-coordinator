@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Toronto Emergency Operations Centre - Mission Control Aesthetic */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --ops-bg: #050816;
+  --ops-panel: #0B1220;
+  --ops-panel-light: #111827;
+  --ops-border: #1E293B;
+
+  --severity-critical: #DC2626;
+  --severity-high: #F59E0B;
+  --severity-medium: #EAB308;
+  --severity-low: #3B82F6;
+
+  --toronto-fire: #CC0000;
+  --toronto-police: #003A70;
+  --toronto-ems: #00563F;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--ops-bg);
+  color: #E5E7EB;
+  font-family: 'Work Sans', sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Mission Control UI Elements */
+
+.ops-panel {
+  background: var(--ops-panel);
+  border: 1px solid var(--ops-border);
+  border-radius: 4px;
+}
+
+.ops-panel-light {
+  background: var(--ops-panel-light);
+  border: 1px solid var(--ops-border);
+  border-radius: 4px;
+}
+
+.ops-border {
+  border: 1px solid var(--ops-border);
+}
+
+/* Severity Indicators */
+
+.severity-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.severity-critical {
+  background-color: var(--severity-critical);
+  box-shadow: 0 0 10px var(--severity-critical);
+}
+
+.severity-high {
+  background-color: var(--severity-high);
+  box-shadow: 0 0 8px var(--severity-high);
+}
+
+.severity-medium {
+  background-color: var(--severity-medium);
+  box-shadow: 0 0 6px var(--severity-medium);
+}
+
+.severity-low {
+  background-color: var(--severity-low);
+  box-shadow: 0 0 4px var(--severity-low);
+}
+
+/* Pulsing animations for critical items */
+
+@keyframes pulse-critical {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.pulse-critical {
+  animation: pulse-critical 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Status badges */
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.status-reported {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-responding {
+  background: rgba(251, 146, 60, 0.2);
+  color: #FDBA74;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.status-on-scene {
+  background: rgba(234, 179, 8, 0.2);
+  color: #FDE047;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.status-contained {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93C5FD;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-resolved {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86EFAC;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Toronto branding */
+
+.toronto-fire-accent {
+  color: var(--toronto-fire);
+}
+
+.toronto-police-accent {
+  color: var(--toronto-police);
+}
+
+.toronto-ems-accent {
+  color: var(--toronto-ems);
+}
+
+/* Scrollbar styling */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ops-panel);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ops-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Buttons */
+
+.btn-primary {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: var(--ops-panel-light);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--ops-border);
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #1F2937;
+  border-color: #374151;
+}
+
+/* Grid layout helpers */
+
+.grid-map {
+  display: grid;
+  gap: 0;
+  background: var(--ops-panel);
+}
+
+/* Monospace time display */
+
+.time-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 500;
+  color: #60A5FA;
+  letter-spacing: 2px;
+}
+
+/* Agent card glow effects */
+
+.agent-card {
+  transition: all 0.3s;
+}
+
+.agent-card.active {
+  border-color: #3B82F6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Map markers */
+
+.incident-marker {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.incident-marker:hover {
+  transform: scale(1.1);
+}
+
+/* Fade in animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Loading spinner */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border: 2px solid var(--ops-border);
+  border-top-color: #3B82F6;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.6s linear infinite;
+}
