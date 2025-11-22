@@ -160,7 +160,7 @@ export class SimulationEngine {
             resource.status = 'on-scene';
             this.logEvent({
               type: 'arrival',
-              description: `${resource.name} arrived at ${incident.id} (${incident.location.address || `Grid ${incident.location.x},${incident.location.y}`})`,
+              description: `${resource.name} arrived at ${incident.id} (${incident.location.address || incident.location.landmark || 'scene'})`,
               severity: incident.severity,
             });
           }

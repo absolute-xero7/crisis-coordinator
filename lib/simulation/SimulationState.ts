@@ -9,9 +9,9 @@ import {
   TorontoShelter,
   SimulationEvent,
   IncidentStatus,
-  ResourceStatus,
+  GeoPosition,
 } from '../types';
-import { TORONTO_HOSPITALS, TORONTO_SHELTERS } from '../torontoData';
+import { TORONTO_HOSPITALS, TORONTO_SHELTERS, TORONTO_FIRE_STATIONS } from '../torontoData';
 
 /**
  * Initialize simulation state from scenario definition
@@ -82,6 +82,38 @@ export function initializeSimulationState(scenario: ScenarioDefinition): Simulat
   };
 }
 
+// ============================================================================
+// REAL TORONTO STATION LOCATIONS (GeoPosition)
+// ============================================================================
+
+const FIRE_STATION_LOCATIONS: GeoPosition[] = [
+  { lat: 43.6702, lng: -79.3898 }, // Station 312 - Yorkville
+  { lat: 43.6562, lng: -79.3591 }, // Station 315 - Sherbourne
+  { lat: 43.6721, lng: -79.3919 }, // Station 333 - Davenport
+  { lat: 43.6386, lng: -79.3661 }, // Station 344 - Queens Quay E
+  { lat: 43.6391, lng: -79.3804 }, // Marine Unit - Harbourfront
+];
+
+const AMBULANCE_BASE_LOCATIONS: GeoPosition[] = [
+  { lat: 43.6596, lng: -79.3877 }, // Near Toronto General
+  { lat: 43.6538, lng: -79.3776 }, // Near St. Michael's
+  { lat: 43.6474, lng: -79.4015 }, // West end (Spadina)
+  { lat: 43.6562, lng: -79.3591 }, // East end (Sherbourne)
+  { lat: 43.6534, lng: -79.3843 }, // Central (City Hall)
+  { lat: 43.6441, lng: -79.3875 }, // Waterfront (Convention Centre)
+  { lat: 43.6573, lng: -79.3904 }, // Near Mount Sinai
+  { lat: 43.6453, lng: -79.3706 }, // Southeast (Jarvis)
+];
+
+const POLICE_DIVISION_LOCATIONS: GeoPosition[] = [
+  { lat: 43.6525, lng: -79.3832 }, // 52 Division - University/Dundas
+  { lat: 43.6538, lng: -79.3676 }, // 51 Division - Parliament
+  { lat: 43.6441, lng: -79.3975 }, // 14 Division - Bathurst
+  { lat: 43.6672, lng: -79.3598 }, // 55 Division - Coxwell
+  { lat: 43.6621, lng: -79.3869 }, // North area
+  { lat: 43.6389, lng: -79.3818 }, // South area - Harbourfront
+];
+
 /**
  * Generate resources based on scenario configuration
  */
@@ -96,8 +128,8 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: `Pumper Truck ${i}`,
       type: 'fire-pumper',
       status: 'available',
-      location: getStationLocation(i, scenario),
-      travelSpeed: 0.5, // 0.5 cells per 10 seconds
+      location: getStationLocation(i),
+      travelSpeed: 0.5, // km per 10 seconds
       capabilities: ['fire', 'rescue'],
       station: `Toronto Fire Station ${310 + i}`,
     });
@@ -111,7 +143,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: `Aerial Truck ${i}`,
       type: 'fire-aerial',
       status: 'available',
-      location: getStationLocation(i, scenario),
+      location: getStationLocation(i),
       travelSpeed: 0.4,
       capabilities: ['fire', 'rescue', 'height'],
       station: `Toronto Fire Station ${310 + i}`,
@@ -126,7 +158,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: `Heavy Rescue ${i}`,
       type: 'fire-heavy-rescue',
       status: 'available',
-      location: getStationLocation(i, scenario),
+      location: getStationLocation(i),
       travelSpeed: 0.5,
       capabilities: ['rescue', 'extrication', 'technical'],
     });
@@ -139,7 +171,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Hazmat Unit 1',
       type: 'fire-hazmat',
       status: 'available',
-      location: { x: 7, y: 5 },
+      location: { lat: 43.6721, lng: -79.3919 }, // Station 333
       travelSpeed: 0.4,
       capabilities: ['hazmat', 'chemical', 'gas'],
       station: 'Toronto Fire Station 333',
@@ -152,7 +184,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Water Rescue 1',
       type: 'fire-water-rescue',
       status: 'available',
-      location: { x: 7, y: 12 },
+      location: { lat: 43.6391, lng: -79.3804 }, // Marine Unit
       travelSpeed: 0.3,
       capabilities: ['water', 'marine', 'dive'],
       station: 'TFS Marine Unit',
@@ -162,7 +194,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Water Rescue 2',
       type: 'fire-water-rescue',
       status: 'available',
-      location: { x: 7, y: 12 },
+      location: { lat: 43.6391, lng: -79.3804 }, // Marine Unit
       travelSpeed: 0.3,
       capabilities: ['water', 'marine', 'dive'],
       station: 'TFS Marine Unit',
@@ -175,7 +207,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Technical Rescue 1',
       type: 'fire-technical-rescue',
       status: 'available',
-      location: { x: 3, y: 10 },
+      location: { lat: 43.6702, lng: -79.3898 }, // Station 312
       travelSpeed: 0.4,
       capabilities: ['technical', 'confined-space', 'high-angle'],
     });
@@ -188,7 +220,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: `Ambulance ${i}`,
       type: 'ambulance',
       status: 'available',
-      location: getAmbulanceLocation(i, scenario),
+      location: getAmbulanceLocation(i),
       travelSpeed: 0.6, // Faster than fire trucks
       capabilities: ['medical', 'transport'],
     });
@@ -201,7 +233,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Paramedic Supervisor 1',
       type: 'ambulance-supervisor',
       status: 'available',
-      location: { x: 7, y: 8 },
+      location: { lat: 43.6534, lng: -79.3843 }, // Central
       travelSpeed: 0.8,
       capabilities: ['medical', 'command'],
     });
@@ -214,7 +246,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Mass Casualty Unit 1',
       type: 'ambulance-mass-casualty',
       status: 'available',
-      location: { x: 5, y: 10 },
+      location: { lat: 43.6474, lng: -79.3815 }, // Near TD Centre
       travelSpeed: 0.4,
       capabilities: ['medical', 'mass-casualty', 'triage'],
     });
@@ -227,7 +259,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: `Police Unit ${i}`,
       type: 'police',
       status: 'available',
-      location: getPoliceLocation(i, scenario),
+      location: getPoliceLocation(i),
       travelSpeed: 0.8, // Fast response
       capabilities: ['traffic', 'crowd-control', 'security'],
     });
@@ -240,7 +272,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Traffic Unit 1',
       type: 'police-traffic',
       status: 'available',
-      location: { x: 8, y: 10 },
+      location: { lat: 43.6492, lng: -79.3782 }, // King Station area
       travelSpeed: 0.9,
       capabilities: ['traffic', 'road-closure'],
     });
@@ -249,7 +281,7 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
       name: 'Traffic Unit 2',
       type: 'police-traffic',
       status: 'available',
-      location: { x: 6, y: 10 },
+      location: { lat: 43.6474, lng: -79.3815 }, // TD Centre area
       travelSpeed: 0.9,
       capabilities: ['traffic', 'road-closure'],
     });
@@ -259,48 +291,24 @@ function generateResources(scenario: ScenarioDefinition): Resource[] {
 }
 
 /**
- * Get station location for fire unit (distributed across grid)
+ * Get station location for fire unit (distributed across stations)
  */
-function getStationLocation(index: number, scenario: ScenarioDefinition): { x: number; y: number } {
-  const stations = [
-    { x: 3, y: 10 }, // Station 312 (west)
-    { x: 11, y: 10 }, // Station 315 (east)
-    { x: 7, y: 5 }, // Station 333 (north)
-    { x: 7, y: 14 }, // Station 344 (south)
-  ];
-  return stations[index % stations.length] || { x: 7, y: 7 };
+function getStationLocation(index: number): GeoPosition {
+  return FIRE_STATION_LOCATIONS[index % FIRE_STATION_LOCATIONS.length];
 }
 
 /**
  * Get ambulance starting location
  */
-function getAmbulanceLocation(index: number, scenario: ScenarioDefinition): { x: number; y: number } {
-  const locations = [
-    { x: 5, y: 8 }, // Near Toronto General
-    { x: 9, y: 9 }, // Near St. Michael's
-    { x: 4, y: 10 }, // West end
-    { x: 10, y: 10 }, // East end
-    { x: 7, y: 7 }, // Central
-    { x: 7, y: 12 }, // Waterfront
-    { x: 5, y: 6 }, // North
-    { x: 9, y: 12 }, // Southeast
-  ];
-  return locations[index % locations.length] || { x: 7, y: 7 };
+function getAmbulanceLocation(index: number): GeoPosition {
+  return AMBULANCE_BASE_LOCATIONS[index % AMBULANCE_BASE_LOCATIONS.length];
 }
 
 /**
  * Get police starting location
  */
-function getPoliceLocation(index: number, scenario: ScenarioDefinition): { x: number; y: number } {
-  const divisions = [
-    { x: 6, y: 8 }, // 52 Division
-    { x: 9, y: 10 }, // 51 Division
-    { x: 4, y: 11 }, // 14 Division
-    { x: 11, y: 7 }, // 55 Division
-    { x: 7, y: 5 }, // North
-    { x: 7, y: 13 }, // South
-  ];
-  return divisions[index % divisions.length] || { x: 7, y: 7 };
+function getPoliceLocation(index: number): GeoPosition {
+  return POLICE_DIVISION_LOCATIONS[index % POLICE_DIVISION_LOCATIONS.length];
 }
 
 /**

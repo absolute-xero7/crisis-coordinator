@@ -1,5 +1,6 @@
 // Scenario 1: PATH System Flood & Union Station Emergency
 // Downtown Toronto Core - Rush Hour Disaster
+// Using real lat/lng coordinates
 
 import { ScenarioDefinition } from '../types';
 
@@ -17,8 +18,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-001',
       type: 'flood',
       location: {
-        x: 7,
-        y: 10,
+        lat: 43.6486,
+        lng: -79.3817,
         address: 'King St & Bay St (PATH Hub)',
         neighborhood: 'Financial District',
         landmark: 'PATH System Hub',
@@ -33,8 +34,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-002',
       type: 'transit',
       location: {
-        x: 7,
-        y: 11,
+        lat: 43.6453,
+        lng: -79.3806,
         address: 'Union Station',
         landmark: 'Union Station',
       },
@@ -48,8 +49,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-003',
       type: 'flood',
       location: {
-        x: 6,
-        y: 10,
+        lat: 43.6474,
+        lng: -79.3815,
         address: 'TD Centre Underground Garage',
         landmark: 'TD Centre',
       },
@@ -63,8 +64,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-004',
       type: 'medical',
       location: {
-        x: 8,
-        y: 10,
+        lat: 43.6463,
+        lng: -79.3830,
         address: 'PATH (York Street section)',
       },
       severity: 4,
@@ -77,8 +78,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-005',
       type: 'infrastructure',
       location: {
-        x: 7,
-        y: 9,
+        lat: 43.6494,
+        lng: -79.3803,
         address: 'Scotia Plaza',
         landmark: 'Scotia Plaza',
       },
@@ -92,8 +93,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-006',
       type: 'traffic',
       location: {
-        x: 8,
-        y: 10,
+        lat: 43.6492,
+        lng: -79.3782,
         address: 'King St & Yonge St',
       },
       severity: 3,
@@ -106,8 +107,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-007',
       type: 'transit',
       location: {
-        x: 7,
-        y: 10,
+        lat: 43.6492,
+        lng: -79.3782,
         address: 'King Station',
         landmark: 'King Station (TTC)',
       },
@@ -121,8 +122,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-008',
       type: 'hazmat',
       location: {
-        x: 7,
-        y: 9,
+        lat: 43.6468,
+        lng: -79.3817,
         address: 'Bay St & Wellington St',
       },
       severity: 4,
@@ -135,8 +136,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-009',
       type: 'medical',
       location: {
-        x: 9,
-        y: 9,
+        lat: 43.6538,
+        lng: -79.3776,
         address: "St. Michael's Hospital",
         landmark: "St. Michael's Hospital",
       },
@@ -150,8 +151,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'TOR-INC-010',
       type: 'flood',
       location: {
-        x: 7,
-        y: 11,
+        lat: 43.6459,
+        lng: -79.3810,
         address: 'Front St & Bay St',
       },
       severity: 2,
@@ -171,8 +172,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
         id: 'TOR-INC-011',
         type: 'infrastructure',
         location: {
-          x: 6,
-          y: 9,
+          lat: 43.6534,
+          lng: -79.3918,
           address: 'Electrical Substation - University Ave',
         },
         severity: 4,
@@ -189,8 +190,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
         id: 'TOR-INC-012',
         type: 'flood',
         location: {
-          x: 8,
-          y: 9,
+          lat: 43.6523,
+          lng: -79.3792,
           address: 'PATH (Yonge Street section)',
         },
         severity: 5,
@@ -229,8 +230,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
     {
       id: 'toronto-general',
       name: 'Toronto General Hospital',
-      address: '200 University Ave',
-      location: { x: 5, y: 8 },
+      address: '200 Elizabeth St',
+      location: { lat: 43.6596, lng: -79.3877 },
       capacityTotal: 60,
       capacityUsed: 30,
       specialties: ['Trauma Level 1', 'Cardiac', 'Stroke'],
@@ -238,8 +239,8 @@ export const pathFloodingScenario: ScenarioDefinition = {
     {
       id: 'st-michaels',
       name: "St. Michael's Hospital",
-      address: '30 Bond St',
-      location: { x: 9, y: 9 },
+      address: '36 Queen St E',
+      location: { lat: 43.6538, lng: -79.3776 },
       capacityTotal: 45,
       capacityUsed: 38, // 85% - already stressed
       specialties: ['Trauma Level 1', 'Emergency'],
@@ -248,7 +249,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'mount-sinai',
       name: 'Mount Sinai Hospital',
       address: '600 University Ave',
-      location: { x: 5, y: 7 },
+      location: { lat: 43.6573, lng: -79.3904 },
       capacityTotal: 40,
       capacityUsed: 20,
       specialties: ['General Emergency'],
@@ -257,7 +258,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'sunnybrook',
       name: 'Sunnybrook Health Sciences',
       address: '2075 Bayview Ave',
-      location: { x: 12, y: 3 },
+      location: { lat: 43.7242, lng: -79.3768 }, // North of downtown
       capacityTotal: 55,
       capacityUsed: 25,
       specialties: ['Trauma', 'Burns', 'Critical Care'],
@@ -266,7 +267,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'north-york-general',
       name: 'North York General',
       address: '4001 Leslie St',
-      location: { x: 10, y: 1 },
+      location: { lat: 43.7679, lng: -79.3647 }, // North of downtown
       capacityTotal: 50,
       capacityUsed: 15,
       specialties: ['General Emergency'],
@@ -278,7 +279,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'metro-convention',
       name: 'Metro Toronto Convention Centre',
       address: '255 Front St W',
-      location: { x: 6, y: 12 },
+      location: { lat: 43.6441, lng: -79.3875 },
       capacityTotal: 2000,
       capacityUsed: 0,
     },
@@ -286,7 +287,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'yonge-dundas',
       name: 'Yonge-Dundas Square Area',
       address: 'Yonge & Dundas St',
-      location: { x: 8, y: 7 },
+      location: { lat: 43.6561, lng: -79.3802 },
       capacityTotal: 500,
       capacityUsed: 0,
     },
@@ -294,7 +295,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'nathan-phillips',
       name: 'Nathan Phillips Square',
       address: '100 Queen St W',
-      location: { x: 6, y: 8 },
+      location: { lat: 43.6525, lng: -79.3832 },
       capacityTotal: 1000,
       capacityUsed: 0,
     },
@@ -302,7 +303,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
       id: 'harbourfront',
       name: 'Harbourfront Centre',
       address: '235 Queens Quay W',
-      location: { x: 7, y: 13 },
+      location: { lat: 43.6389, lng: -79.3818 },
       capacityTotal: 800,
       capacityUsed: 0,
     },

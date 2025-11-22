@@ -109,13 +109,14 @@ export function validateScenario(scenario: ScenarioDefinition): {
     if (!incident.id) errors.push(`Incident missing ID`);
     if (!incident.type) errors.push(`Incident ${incident.id} missing type`);
     if (!incident.location) errors.push(`Incident ${incident.id} missing location`);
+    const { x, y } = incident.location || { x: undefined, y: undefined };
     if (
-      !incident.location.x ||
-      !incident.location.y ||
-      incident.location.x < 0 ||
-      incident.location.y < 0 ||
-      incident.location.x >= scenario.citySize.width ||
-      incident.location.y >= scenario.citySize.height
+      x === undefined ||
+      y === undefined ||
+      x < 0 ||
+      y < 0 ||
+      x >= scenario.citySize.width ||
+      y >= scenario.citySize.height
     ) {
       errors.push(`Incident ${incident.id} has invalid location`);
     }

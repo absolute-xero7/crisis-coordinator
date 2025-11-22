@@ -1,5 +1,6 @@
 // Scenario 2: DVP Winter Blizzard + Multi-Vehicle Pileup
 // Don Valley Parkway & Eastern Toronto - Evening Rush Hour
+// Using real lat/lng coordinates
 
 import { ScenarioDefinition } from '../types';
 
@@ -17,8 +18,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-101',
       type: 'mass-casualty',
       location: {
-        x: 8,
-        y: 8,
+        lat: 43.6965,
+        lng: -79.3528,
         address: 'DVP at Don Mills Road',
         landmark: 'Don Valley Parkway',
       },
@@ -32,8 +33,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-102',
       type: 'hazmat',
       location: {
-        x: 8,
-        y: 6,
+        lat: 43.7086,
+        lng: -79.3458,
         address: 'DVP at Eglinton Ave',
       },
       severity: 4,
@@ -46,8 +47,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-103',
       type: 'transit',
       location: {
-        x: 10,
-        y: 4,
+        lat: 43.7634,
+        lng: -79.3438,
         address: 'Don Mills Rd & Sheppard Ave',
       },
       severity: 3,
@@ -60,8 +61,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-104',
       type: 'infrastructure',
       location: {
-        x: 7,
-        y: 7,
+        lat: 43.7015,
+        lng: -79.3448,
         address: 'Thorncliffe Park apartment tower',
         neighborhood: 'Thorncliffe Park',
       },
@@ -75,8 +76,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-105',
       type: 'medical',
       location: {
-        x: 6,
-        y: 8,
+        lat: 43.7015,
+        lng: -79.3658,
         address: 'Leaside neighborhood',
         neighborhood: 'Leaside',
       },
@@ -90,8 +91,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-106',
       type: 'traffic',
       location: {
-        x: 5,
-        y: 9,
+        lat: 43.6928,
+        lng: -79.3528,
         address: "O'Connor Dr & St. Clair Ave",
       },
       severity: 4,
@@ -104,8 +105,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-107',
       type: 'flood',
       location: {
-        x: 8,
-        y: 10,
+        lat: 43.6772,
+        lng: -79.3608,
         address: 'DVP near Pottery Road',
       },
       severity: 3,
@@ -118,8 +119,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-108',
       type: 'infrastructure',
       location: {
-        x: 3,
-        y: 10,
+        lat: 43.6534,
+        lng: -79.3918,
         address: 'Downtown shelter',
       },
       severity: 3,
@@ -132,8 +133,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-109',
       type: 'fire',
       location: {
-        x: 9,
-        y: 9,
+        lat: 43.6878,
+        lng: -79.3238,
         address: 'East York residential',
         neighborhood: 'East York',
       },
@@ -147,8 +148,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-110',
       type: 'hazmat',
       location: {
-        x: 12,
-        y: 10,
+        lat: 43.7085,
+        lng: -79.2638,
         address: 'Scarborough home',
         neighborhood: 'Scarborough',
       },
@@ -162,8 +163,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-111',
       type: 'medical',
       location: {
-        x: 10,
-        y: 3,
+        lat: 43.7242,
+        lng: -79.3768,
         address: 'Sunnybrook Hospital',
         landmark: 'Sunnybrook Health Sciences',
       },
@@ -177,8 +178,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'TOR-INC-112',
       type: 'infrastructure',
       location: {
-        x: 11,
-        y: 8,
+        lat: 43.6972,
+        lng: -79.2958,
         address: 'Victoria Park Ave',
       },
       severity: 2,
@@ -198,8 +199,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
         id: 'TOR-INC-113',
         type: 'mass-casualty',
         location: {
-          x: 4,
-          y: 12,
+          lat: 43.6389,
+          lng: -79.3958,
           address: 'Gardiner Expressway at Spadina',
           landmark: 'Gardiner Expressway',
         },
@@ -247,8 +248,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
     {
       id: 'toronto-general',
       name: 'Toronto General Hospital',
-      address: '200 University Ave',
-      location: { x: 5, y: 8 },
+      address: '200 Elizabeth St',
+      location: { lat: 43.6596, lng: -79.3877 },
       capacityTotal: 60,
       capacityUsed: 30,
       specialties: ['Trauma Level 1', 'Cardiac', 'Stroke'],
@@ -256,8 +257,8 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
     {
       id: 'st-michaels',
       name: "St. Michael's Hospital",
-      address: '30 Bond St',
-      location: { x: 9, y: 9 },
+      address: '36 Queen St E',
+      location: { lat: 43.6538, lng: -79.3776 },
       capacityTotal: 45,
       capacityUsed: 36, // 80%
       specialties: ['Trauma Level 1', 'Emergency'],
@@ -266,7 +267,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'mount-sinai',
       name: 'Mount Sinai Hospital',
       address: '600 University Ave',
-      location: { x: 5, y: 7 },
+      location: { lat: 43.6573, lng: -79.3904 },
       capacityTotal: 40,
       capacityUsed: 20,
       specialties: ['General Emergency'],
@@ -275,7 +276,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'sunnybrook',
       name: 'Sunnybrook Health Sciences',
       address: '2075 Bayview Ave',
-      location: { x: 12, y: 3 },
+      location: { lat: 43.7242, lng: -79.3768 }, // North of downtown
       capacityTotal: 55,
       capacityUsed: 52, // 95% - on diversion!
       specialties: ['Trauma', 'Burns', 'Critical Care'],
@@ -284,7 +285,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'north-york-general',
       name: 'North York General',
       address: '4001 Leslie St',
-      location: { x: 10, y: 1 },
+      location: { lat: 43.7679, lng: -79.3647 }, // North of downtown
       capacityTotal: 50,
       capacityUsed: 15,
       specialties: ['General Emergency'],
@@ -296,7 +297,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'community-center-1',
       name: 'East York Community Centre',
       address: '1081 Pape Ave',
-      location: { x: 9, y: 10 },
+      location: { lat: 43.6878, lng: -79.3478 },
       capacityTotal: 200,
       capacityUsed: 0,
     },
@@ -304,7 +305,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'community-center-2',
       name: 'Thorncliffe Park Community Centre',
       address: '45 Overlea Blvd',
-      location: { x: 7, y: 6 },
+      location: { lat: 43.7015, lng: -79.3448 },
       capacityTotal: 300,
       capacityUsed: 0,
     },
@@ -312,7 +313,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'community-center-3',
       name: 'Scarborough Civic Centre',
       address: '150 Borough Dr',
-      location: { x: 13, y: 9 },
+      location: { lat: 43.7728, lng: -79.2578 },
       capacityTotal: 500,
       capacityUsed: 0,
     },
@@ -320,7 +321,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       id: 'metro-convention',
       name: 'Metro Toronto Convention Centre',
       address: '255 Front St W',
-      location: { x: 6, y: 12 },
+      location: { lat: 43.6441, lng: -79.3875 },
       capacityTotal: 2000,
       capacityUsed: 0,
     },

@@ -42,7 +42,7 @@ export function formatIncidentsForPrompt(incidents: Incident[]): string {
   return incidents
     .filter((i) => i.status !== 'resolved')
     .map((i) => {
-      const address = i.location.address || `Grid ${i.location.x},${i.location.y}`;
+      const address = i.location.address || `${i.location.lat.toFixed(4)}, ${i.location.lng.toFixed(4)}`;
       const neighborhood = i.location.neighborhood ? ` (${i.location.neighborhood})` : '';
       const landmark = i.location.landmark ? ` near ${i.location.landmark}` : '';
 
@@ -65,7 +65,7 @@ Assigned Resources: ${i.assignedResources.length > 0 ? i.assignedResources.join(
 export function formatResourcesForPrompt(resources: Resource[]): string {
   return resources
     .map((r) => {
-      const location = r.location ? `Grid ${r.location.x},${r.location.y}` : 'Unknown';
+      const location = r.location ? `${r.location.lat.toFixed(4)}, ${r.location.lng.toFixed(4)}` : 'Unknown';
       return `ID: ${r.id} | Name: ${r.name} | Type: ${r.type} | Status: ${r.status} | Location: ${location} | Assigned: ${r.assignedTo || 'None'}`;
     })
     .join('\n');

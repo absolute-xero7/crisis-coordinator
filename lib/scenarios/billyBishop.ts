@@ -1,5 +1,6 @@
 // Scenario 3: Billy Bishop Airport Incident + Waterfront Emergency
 // Toronto Waterfront - Summer Afternoon
+// Using real lat/lng coordinates
 
 import { ScenarioDefinition } from '../types';
 
@@ -17,8 +18,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-201',
       type: 'mass-casualty',
       location: {
-        x: 5,
-        y: 13,
+        lat: 43.6285,
+        lng: -79.3962,
         address: 'Lake Ontario, 200m offshore from Billy Bishop Airport',
         landmark: 'Billy Bishop Airport',
       },
@@ -32,8 +33,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-202',
       type: 'traffic',
       location: {
-        x: 6,
-        y: 13,
+        lat: 43.6378,
+        lng: -79.3815,
         address: 'Lake Ontario, near Toronto Island Ferry Terminal',
       },
       severity: 4,
@@ -46,8 +47,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-203',
       type: 'fire',
       location: {
-        x: 5,
-        y: 13,
+        lat: 43.6285,
+        lng: -79.3962,
         address: 'Lake Ontario surface',
       },
       severity: 4,
@@ -60,8 +61,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-204',
       type: 'mass-casualty',
       location: {
-        x: 7,
-        y: 12,
+        lat: 43.6389,
+        lng: -79.3818,
         address: 'Harbourfront Centre',
         landmark: 'Harbourfront Centre',
       },
@@ -75,8 +76,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-205',
       type: 'medical',
       location: {
-        x: 7,
-        y: 13,
+        lat: 43.6389,
+        lng: -79.3818,
         address: 'Queens Quay W',
       },
       severity: 4,
@@ -89,8 +90,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-206',
       type: 'traffic',
       location: {
-        x: 6,
-        y: 11,
+        lat: 43.6408,
+        lng: -79.3840,
         address: 'Lakeshore Blvd & York St',
       },
       severity: 3,
@@ -103,8 +104,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-207',
       type: 'medical',
       location: {
-        x: 5,
-        y: 13,
+        lat: 43.6285,
+        lng: -79.3962,
         address: 'Water rescue zone',
       },
       severity: 4,
@@ -117,8 +118,8 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'TOR-INC-208',
       type: 'hazmat',
       location: {
-        x: 6,
-        y: 12,
+        lat: 43.6378,
+        lng: -79.3815,
         address: 'Toronto Island Ferry Dock',
       },
       severity: 3,
@@ -167,8 +168,8 @@ export const billyBishopScenario: ScenarioDefinition = {
     {
       id: 'toronto-general',
       name: 'Toronto General Hospital',
-      address: '200 University Ave',
-      location: { x: 5, y: 8 },
+      address: '200 Elizabeth St',
+      location: { lat: 43.6596, lng: -79.3877 },
       capacityTotal: 60,
       capacityUsed: 35,
       specialties: ['Trauma Level 1', 'Cardiac', 'Stroke'],
@@ -176,8 +177,8 @@ export const billyBishopScenario: ScenarioDefinition = {
     {
       id: 'st-michaels',
       name: "St. Michael's Hospital",
-      address: '30 Bond St',
-      location: { x: 9, y: 9 },
+      address: '36 Queen St E',
+      location: { lat: 43.6538, lng: -79.3776 },
       capacityTotal: 45,
       capacityUsed: 30,
       specialties: ['Trauma Level 1', 'Emergency'],
@@ -186,7 +187,7 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'mount-sinai',
       name: 'Mount Sinai Hospital',
       address: '600 University Ave',
-      location: { x: 5, y: 7 },
+      location: { lat: 43.6573, lng: -79.3904 },
       capacityTotal: 40,
       capacityUsed: 20,
       specialties: ['General Emergency'],
@@ -198,7 +199,7 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'metro-convention',
       name: 'Metro Toronto Convention Centre',
       address: '255 Front St W',
-      location: { x: 6, y: 12 },
+      location: { lat: 43.6441, lng: -79.3875 },
       capacityTotal: 2000,
       capacityUsed: 0,
     },
@@ -206,7 +207,7 @@ export const billyBishopScenario: ScenarioDefinition = {
       id: 'nathan-phillips',
       name: 'Nathan Phillips Square',
       address: '100 Queen St W',
-      location: { x: 6, y: 8 },
+      location: { lat: 43.6525, lng: -79.3832 },
       capacityTotal: 1000,
       capacityUsed: 0,
     },

@@ -102,7 +102,8 @@ Small aircraft crashes into Lake Ontario near Billy Bishop Airport. Fuel fire on
 
 - Node.js 18+
 - npm or yarn
-- Anthropic API key
+- Anthropic API key (Claude 3.5 Sonnet)
+- Supabase project (free tier is fine) with URL + anon + service role keys
 
 ### Installation
 
@@ -121,11 +122,34 @@ npm install
 
 3. **Set up environment variables**
 
-Create a `.env.local` file:
+Copy the example file and fill in your values:
 
 ```bash
-ANTHROPIC_API_KEY=your_api_key_here
+cp .env.local.example .env.local
 ```
+
+Update `.env.local` with:
+
+```bash
+ANTHROPIC_API_KEY=sk-ant-...
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=service-role-key   # server-side only
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=public-anon-key
+```
+
+> **Security note:** Keep `.env.local` out of version control. The service role key is required for local server-side routes only and never sent to the browser.
+
+4. **Provision Supabase schema**
+
+Use the SQL editor (or CLI) to apply `supabase/schema.sql` so the `scenarios`, `simulation_runs`, and `simulation_events` tables exist:
+
+```bash
+supabase db push --file supabase/schema.sql
+# or paste the SQL file contents in the Supabase dashboard
+```
+
+Need a step-by-step walkthrough? See [`docs/SETUP.md`](docs/SETUP.md) for screenshots, troubleshooting tips, and verification steps.
 
 4. **Run development server**
 

@@ -10,63 +10,72 @@ export default function IncidentList({ incidents }: IncidentListProps) {
   const resolvedIncidents = incidents.filter((i) => i.status === 'resolved');
 
   return (
-    <div className="ops-panel p-4 flex flex-col h-full">
-      <h2 className="text-lg font-display font-semibold mb-4">Active Incidents</h2>
+    <div className="ops-panel p-3 flex flex-col h-full bg-gradient-to-br from-ops-panel via-ops-panel to-ops-panel-light">
+      <div className="flex items-center justify-between mb-2 flex-shrink-0">
+        <h2 className="text-sm font-display font-semibold text-blue-300">Incidents</h2>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-mono">
+          {activeIncidents.length} active
+        </span>
+      </div>
 
-      <div className="flex-1 overflow-y-auto space-y-2">
+      <div className="flex-1 overflow-y-auto space-y-1.5 min-h-0">
         {activeIncidents.length === 0 && (
-          <p className="text-sm text-gray-500 text-center py-8">No active incidents</p>
+          <div className="text-sm text-gray-500 text-center py-8 flex flex-col items-center gap-2">
+            <div className="text-4xl opacity-50">✓</div>
+            <p>No active incidents</p>
+          </div>
         )}
 
-        {activeIncidents.map((incident) => (
-          <div key={incident.id} className="ops-panel-light p-3 rounded">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="severity-indicator"
-                  style={{
-                    backgroundColor: `var(--severity-${incident.severity >= 5 ? 'critical' : incident.severity >= 4 ? 'high' : incident.severity >= 3 ? 'medium' : 'low'})`,
-                  }}
-                ></span>
-                <span className="font-mono text-xs font-semibold">{incident.id}</span>
-              </div>
-              <span className={`status-badge status-${incident.status}`}>
-                {incident.status}
-              </span>
-            </div>
+        {activeIncidents.map((incident, idx) => {
+          const severityLevel = incident.severity >= 5 ? 'critical' : incident.severity >= 4 ? 'high' : incident.severity >= 3 ? 'medium' : 'low';
 
-            {/* Type & Location */}
-            <div className="mb-2">
-              <div className="text-sm font-semibold text-gray-200">
+          return (
+            <div
+              key={incident.id}
+              className="ops-panel-light p-2 rounded-lg hover-lift transition-all duration-200 border border-transparent hover:border-red-500/30 animate-fade-in"
+              style={{ animationDelay: `${idx * 30}ms` }}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-1.5">
+                  <span
+                    className={`w-2 h-2 rounded-full ${severityLevel === 'critical' ? 'pulse-critical' : ''}`}
+                    style={{
+                      backgroundColor: `var(--severity-${severityLevel})`,
+                    }}
+                  ></span>
+                  <span className="font-mono text-[10px] font-semibold text-blue-300">{incident.id}</span>
+                </div>
+                <span className={`status-badge status-${incident.status} text-[9px] px-1.5 py-0.5`}>
+                  {incident.status}
+                </span>
+              </div>
+
+              {/* Type & Location */}
+              <div className="text-xs font-semibold text-gray-100 truncate">
                 {incident.type.toUpperCase()}
               </div>
-              <div className="text-xs text-gray-400">
-                {incident.location.address || `Grid ${incident.location.x},${incident.location.y}`}
+              <div className="text-[10px] text-gray-400 truncate mb-1">
+                {incident.location.address || incident.location.landmark || incident.location.neighborhood || `${incident.location.lat.toFixed(4)}, ${incident.location.lng.toFixed(4)}`}
+              </div>
+
+              {/* Stats Row */}
+              <div className="flex items-center justify-between text-[10px] text-gray-500">
+                <span className="font-mono">{incident.peopleAffected} ppl</span>
+                <span className="font-mono">{incident.assignedResources.length} units</span>
+                <span className="font-mono opacity-70">{formatTime(incident.reportedAt)}</span>
               </div>
             </div>
-
-            {/* Details */}
-            <div className="text-xs text-gray-400 mb-2 line-clamp-2">
-              {incident.details}
-            </div>
-
-            {/* Stats */}
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>👥 {incident.peopleAffected}</span>
-              <span>🚨 {incident.assignedResources.length} units</span>
-              <span>{formatTime(incident.reportedAt)}</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Resolved Count */}
       {resolvedIncidents.length > 0 && (
-        <div className="mt-4 pt-4 border-t border-ops-border">
-          <div className="text-sm text-gray-400 text-center">
-            ✅ {resolvedIncidents.length} incident{resolvedIncidents.length !== 1 ? 's' : ''}{' '}
-            resolved
+        <div className="mt-2 pt-2 border-t border-ops-border flex-shrink-0">
+          <div className="text-[10px] text-center px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center justify-center gap-1">
+            <span>✅</span>
+            <span className="font-medium">{resolvedIncidents.length} resolved</span>
           </div>
         </div>
       )}

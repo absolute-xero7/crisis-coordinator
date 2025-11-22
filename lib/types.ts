@@ -10,7 +10,20 @@ export interface GridPosition {
   y: number;
 }
 
-export interface TorontoLocation extends GridPosition {
+export interface GeoPosition {
+  lat: number;
+  lng: number;
+}
+
+// Location type that supports real lat/lng coordinates
+export interface TorontoLocation {
+  // Real geographic coordinates (preferred)
+  lat: number;
+  lng: number;
+  // Legacy grid position (for backwards compatibility)
+  x?: number;
+  y?: number;
+  // Address info
   address?: string;
   neighborhood?: string;
   landmark?: string;
@@ -24,7 +37,7 @@ export interface TorontoHospital {
   id: string;
   name: string;
   address: string;
-  location: GridPosition;
+  location: GeoPosition;
   capacityTotal: number;
   capacityUsed: number;
   specialties: string[];
@@ -35,7 +48,7 @@ export interface TorontoShelter {
   id: string;
   name: string;
   address: string;
-  location: GridPosition;
+  location: GeoPosition;
   capacityTotal: number;
   capacityUsed: number;
 }
@@ -109,9 +122,9 @@ export interface Resource {
   name: string; // "Pumper Truck 1"
   type: ResourceType;
   status: ResourceStatus;
-  location: GridPosition;
+  location: GeoPosition;
   assignedTo?: string; // Incident ID
-  travelSpeed: number; // Grid cells per 10 seconds
+  travelSpeed: number; // Kilometers per minute for real coords
   capabilities: string[]; // ['fire', 'rescue', 'water']
   station?: string; // "Toronto Fire Station 312"
 }

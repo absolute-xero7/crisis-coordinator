@@ -1,11 +1,23 @@
 // LLM Client - Anthropic Claude API Integration
 
-import Anthropic from '@anthropic-ai/sdk';
+import type Anthropic from '@anthropic-ai/sdk';
 
-// Initialize Anthropic client
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || '',
-});
+let anthropicClient: Anthropic | null = null;
+
+async function getAnthropicClient() {
+  if (typeof window !== 'undefined') {
+    throw new Error('Anthropic SDK is not available in the browser');
+  }
+
+  if (!anthropicClient) {
+    const { default: AnthropicSDK } = await import('@anthropic-ai/sdk');
+    anthropicClient = new AnthropicSDK({
+      apiKey: process.env.ANTHROPIC_API_KEY || '',
+    });
+  }
+
+  return anthropicClient;
+}
 
 export interface LLMResponse {
   text: string;
@@ -24,6 +36,11 @@ export async function callClaude(
   temperature: number = 0.7
 ): Promise<LLMResponse> {
   try {
+    if (typeof window !== 'undefined') {
+      throw new Error('Claude API cannot be called from the browser runtime');
+    }
+
+    const anthropic = await getAnthropicClient();
     const message = await anthropic.messages.create({
       model: 'claude-3-5-sonnet-20241022',
       max_tokens: maxTokens,

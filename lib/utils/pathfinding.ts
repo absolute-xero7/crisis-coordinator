@@ -1,7 +1,7 @@
 // A* Pathfinding Algorithm for Emergency Vehicle Routing
 
 import { GridPosition } from '../types';
-import { manhattanDistance, getNeighbors, isWithinBounds, positionsEqual } from './mapUtils';
+import { manhattanDistance, getNeighbors, isWithinBounds, gridPositionsEqual } from './mapUtils';
 
 interface PathNode {
   position: GridPosition;
@@ -23,7 +23,7 @@ export function findPath(
   obstacles: GridPosition[] = []
 ): GridPosition[] {
   // Quick check if already at goal
-  if (positionsEqual(start, goal)) {
+  if (gridPositionsEqual(start, goal)) {
     return [start];
   }
 
@@ -53,7 +53,7 @@ export function findPath(
     const current = openList.shift()!;
 
     // Check if we reached the goal
-    if (positionsEqual(current.position, goal)) {
+    if (gridPositionsEqual(current.position, goal)) {
       // Reconstruct path
       const path: GridPosition[] = [];
       let node: PathNode | null = current;
@@ -90,7 +90,7 @@ export function findPath(
 
       // Check if this neighbor is already in open list
       const existingNode = openList.find((node) =>
-        positionsEqual(node.position, neighborPos)
+        gridPositionsEqual(node.position, neighborPos)
       );
 
       if (existingNode) {

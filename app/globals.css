@@ -113,6 +113,20 @@ code, pre {
   animation: pulse-critical 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Map incident glow - aggressive opacity pulse */
+@keyframes incident-glow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.incident-pulse-ring {
+  animation: incident-glow 1.5s ease-in-out infinite;
+}
+
 /* Status badges */
 
 .status-badge {
@@ -190,7 +204,7 @@ code, pre {
   background: #334155;
 }
 
-/* Buttons */
+/* Buttons (Legacy - keeping for compatibility) */
 
 .btn-primary {
   background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
@@ -226,6 +240,47 @@ code, pre {
 .btn-secondary:hover {
   background: #1F2937;
   border-color: #374151;
+}
+
+/* Loading skeleton animations */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--ops-panel) 0%,
+    var(--ops-panel-light) 20%,
+    var(--ops-panel) 40%,
+    var(--ops-panel) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s linear infinite;
+  border-radius: 4px;
+}
+
+/* Page transition fade */
+
+@keyframes pageTransition {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-transition {
+  animation: pageTransition 0.4s ease-out;
 }
 
 /* Grid layout helpers */
@@ -285,6 +340,110 @@ code, pre {
   animation: fadeIn 0.3s ease-out;
 }
 
+/* Enhanced fade-in-up with stagger support */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Animation delays for stagger effect */
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+.animation-delay-900 { animation-delay: 0.9s; }
+.animation-delay-1000 { animation-delay: 1.0s; }
+.animation-delay-1100 { animation-delay: 1.1s; }
+.animation-delay-1200 { animation-delay: 1.2s; }
+.animation-delay-1300 { animation-delay: 1.3s; }
+.animation-delay-1400 { animation-delay: 1.4s; }
+
+/* Pulsing glow for status indicators */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px currentColor;
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 16px currentColor;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Grid background pattern */
+
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+@keyframes gridFlow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+.animate-grid-flow {
+  animation: gridFlow 20s linear infinite;
+}
+
+/* Hover lift effects */
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hover-lift-strong {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift-strong:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient shift on hover */
+
+.hover-gradient-shift {
+  background-size: 200% auto;
+  transition: background-position 0.5s ease;
+}
+
+.hover-gradient-shift:hover {
+  background-position: right center;
+}
+
 /* Loading spinner */
 
 @keyframes spin {
@@ -300,4 +459,73 @@ code, pre {
   width: 24px;
   height: 24px;
   animation: spin 0.6s linear infinite;
+}
+
+/* Enhanced Buttons */
+
+.btn-primary-enhanced {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary-enhanced:hover::before {
+  left: 100%;
+}
+
+.btn-primary-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+}
+
+.btn-primary-enhanced:active {
+  transform: translateY(0);
+}
+
+.btn-secondary-enhanced {
+  background: var(--ops-panel-light);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid var(--ops-border);
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary-enhanced:hover {
+  background: #1F2937;
+  border-color: #3B82F6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.2);
+}
+
+.btn-secondary-enhanced:active {
+  transform: translateY(0);
 }

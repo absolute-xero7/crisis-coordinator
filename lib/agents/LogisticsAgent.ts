@@ -3,7 +3,7 @@
 import { SimulationState, LogisticsDecision, TriageDecision } from '../types';
 import { callAgentLLM } from '../utils/llmClient';
 import { buildLogisticsAgentPrompt } from './agentPrompts';
-import { manhattanDistance } from '../utils/mapUtils';
+import { geoDistance } from '../utils/mapUtils';
 
 export class LogisticsAgent {
   /**
@@ -65,7 +65,7 @@ export class LogisticsAgent {
         // Skip if over 90% capacity
         if (utilization > 0.9) continue;
 
-        const distance = manhattanDistance(incident.location, hospital.location);
+        const distance = geoDistance(incident.location, hospital.location);
         // Score: closer is better, lower utilization is better
         const score = 100 / (distance + 1) - utilization * 50;
 
@@ -98,8 +98,8 @@ export class LogisticsAgent {
         .filter((s) => s.capacityUsed < s.capacityTotal)
         .sort(
           (a, b) =>
-            manhattanDistance(incident.location, a.location) -
-            manhattanDistance(incident.location, b.location)
+            geoDistance(incident.location, a.location) -
+            geoDistance(incident.location, b.location)
         )[0];
 
       if (nearestShelter) {
