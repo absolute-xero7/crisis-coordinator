@@ -39,17 +39,17 @@ export default function Controls({
       </div>
 
       {/* Speed Control with Better Design */}
-      <div className="flex items-center gap-4 px-4 py-2 rounded-lg bg-ops-panel-light border border-ops-border">
-        <span className="text-sm text-gray-400 font-medium">Speed:</span>
+      <div className="flex items-center gap-4 px-4 py-2 bg-ops-panel-light border border-ops-border">
+        <span className="text-sm text-gray-300 font-medium">Speed:</span>
         <div className="flex gap-1">
           {([1, 2, 5, 10] as const).map((s) => (
             <button
               key={s}
               onClick={() => onSpeedChange(s)}
-              className={`px-3 py-1.5 rounded-md font-mono text-sm transition-all duration-300 ${
+              className={`px-3 py-1.5 font-mono text-sm transition-all duration-300 ${
                 speed === s
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-110'
-                  : 'bg-ops-panel text-gray-400 hover:bg-ops-panel-light hover:text-gray-300 hover:scale-105'
+                  ? 'bg-accent-amber text-ops-bg shadow-lg shadow-accent-amber/30 scale-110'
+                  : 'bg-ops-panel text-gray-300 hover:bg-ops-panel-light hover:text-ink hover:scale-105 border border-transparent hover:border-accent-amber/30'
               }`}
             >
               {s}x
@@ -61,7 +61,7 @@ export default function Controls({
       {/* Info with Better Keyboard Visual */}
       <div className="text-sm text-gray-400 flex items-center gap-2">
         <span>Press</span>
-        <kbd className="px-3 py-1.5 bg-ops-panel-light rounded-md border border-ops-border text-blue-300 font-mono text-xs shadow-sm">
+        <kbd className="px-3 py-1.5 bg-ops-panel-light rounded-md border border-ops-border text-accent-amber font-mono text-xs shadow-sm">
           Space
         </kbd>
         <span>to play/pause</span>

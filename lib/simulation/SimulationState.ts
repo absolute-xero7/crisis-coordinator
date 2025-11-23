@@ -69,6 +69,7 @@ export function initializeSimulationState(scenario: ScenarioDefinition): Simulat
       logistics: null,
       medical: null,
       communications: null,
+      commander: null,
     },
     stats: {
       totalIncidents: incidents.length,

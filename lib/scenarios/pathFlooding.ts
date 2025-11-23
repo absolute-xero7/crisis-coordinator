@@ -98,7 +98,7 @@ export const pathFloodingScenario: ScenarioDefinition = {
         address: 'King St & Yonge St',
       },
       severity: 3,
-      peopleAffected: 0,
+      peopleAffected: 200,
       details:
         'Complete gridlock on King Street. Emergency vehicles unable to reach PATH entrances. Streetcars blocked. Estimated 45min delay to scene.',
       reportedAt: 720, // T+12:00
@@ -207,6 +207,23 @@ export const pathFloodingScenario: ScenarioDefinition = {
       payload: {
         hospitalId: 'toronto-general',
         capacityUsed: 54, // 90%
+      },
+    },
+    {
+      id: 'evt-st-mikes-divert',
+      triggerTime: 2100, // T+35:00
+      type: 'hospital_capacity',
+      payload: {
+        hospitalId: 'st-michaels',
+        capacityUsed: 43, // ~95%
+      },
+    },
+    {
+      id: 'evt-transit-shutdown',
+      triggerTime: 1200, // T+20:00
+      type: 'road_closure',
+      payload: {
+        description: 'TTC Line 1 closed between Union and Queen; King streetcars halted King-Bay to Yonge. Detours in effect.',
       },
     },
     {

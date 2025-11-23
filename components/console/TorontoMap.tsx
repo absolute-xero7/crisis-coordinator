@@ -94,13 +94,13 @@ export default function TorontoMap({ state }: TorontoMapProps) {
   const getSeverityColor = (severity: number) => {
     switch (severity) {
       case 5:
-        return '#DC2626';
+        return '#f06767';
       case 4:
-        return '#F59E0B';
+        return '#f5b75f';
       case 3:
-        return '#EAB308';
+        return '#8bc6ff';
       case 2:
-        return '#3B82F6';
+        return '#7be0c3';
       default:
         return '#6B7280';
     }
@@ -108,9 +108,9 @@ export default function TorontoMap({ state }: TorontoMapProps) {
 
   // Resource type colors
   const getResourceColor = (type: string) => {
-    if (type.startsWith('fire')) return '#CC0000';
-    if (type.startsWith('ambulance')) return '#00563F';
-    if (type.startsWith('police')) return '#003A70';
+    if (type.startsWith('fire')) return '#d83a36';
+    if (type.startsWith('ambulance')) return '#1f8f78';
+    if (type.startsWith('police')) return '#1f4f8f';
     return '#6B7280';
   };
 
@@ -252,7 +252,7 @@ export default function TorontoMap({ state }: TorontoMapProps) {
       </div>
 
       <div
-        className="relative flex-1 min-h-0 overflow-hidden rounded-xl border border-ops-border bg-gradient-to-br from-ops-panel to-ops-panel-light shadow-xl"
+        className="relative flex-1 min-h-0 overflow-hidden border border-ops-border bg-gradient-to-br from-ops-panel to-ops-panel-light shadow-xl"
       >
         <div
           ref={mapContainerRef}
@@ -560,7 +560,7 @@ export default function TorontoMap({ state }: TorontoMapProps) {
           </div>
         )}
 
-        <div className="absolute top-4 right-4 bg-ops-panel/90 backdrop-blur-md border border-ops-border rounded-lg p-3 text-xs text-gray-200 shadow-md min-w-[200px] z-20">
+        <div className="absolute top-4 right-4 bg-ops-panel/90 backdrop-blur-md border border-ops-border p-3 text-xs text-gray-200 shadow-md min-w-[200px] z-20">
           <div className="grid grid-cols-2 gap-2">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-severity-critical"></div>

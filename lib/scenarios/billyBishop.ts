@@ -155,13 +155,40 @@ export const billyBishopScenario: ScenarioDefinition = {
         description: 'Canadian Coast Guard arrives on scene. Additional marine rescue capacity. Taking over fuel containment operations.',
       },
     },
+    {
+      id: 'evt-st-mikes-divert',
+      triggerTime: 1200, // T+20:00
+      type: 'hospital_capacity',
+      payload: {
+        hospitalId: 'st-michaels',
+        capacityUsed: 43, // ~95%
+      },
+    },
+    {
+      id: 'evt-crowd-surge',
+      triggerTime: 900, // T+15:00
+      type: 'spawn_incident',
+      payload: {
+        id: 'TOR-INC-209',
+        type: 'mass-casualty',
+        location: {
+          lat: 43.6389,
+          lng: -79.3818,
+          address: 'Queens Quay W & York St',
+        },
+        severity: 3,
+        peopleAffected: 300,
+        details:
+          'Crowd surge near Queens Quay as evacuation routes bottleneck. Multiple trampling injuries; EMS access delayed by traffic gridlock.',
+      },
+    },
   ],
 
   resources: {
     fireUnits: 10,
     ambulances: 10,
     policeUnits: 8,
-    specialized: ['water-rescue', 'hazmat'],
+    specialized: ['water-rescue', 'hazmat', 'marine-unit'],
   },
 
   hospitals: [

@@ -31,8 +31,8 @@ export default function EventLog({ events }: EventLogProps) {
   return (
     <div className="ops-panel p-3 flex flex-col h-full bg-gradient-to-br from-ops-panel via-ops-panel to-ops-panel-light">
       <div className="flex items-center justify-between mb-2 flex-shrink-0">
-        <h2 className="text-sm font-display font-semibold text-blue-300">Timeline</h2>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-500/10 border border-gray-500/30 text-gray-400 font-mono">
+        <h2 className="text-sm font-display font-semibold text-accent-amber">Timeline</h2>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-mint/10 border border-accent-mint/30 text-accent-mint font-mono">
           {recentEvents.length}
         </span>
       </div>
@@ -48,22 +48,21 @@ export default function EventLog({ events }: EventLogProps) {
         {recentEvents.map((event, idx) => {
           const borderColor =
             event.type === 'incident'
-              ? '#DC2626'
+              ? '#f06767'
               : event.type === 'decision'
-              ? '#3B82F6'
+              ? '#f5b75f'
               : event.type === 'arrival'
-              ? '#10B981'
+              ? '#7be0c3'
               : event.type === 'resolution'
-              ? '#22C55E'
+              ? '#7be0c3'
               : '#6B7280';
 
           return (
             <div
               key={event.id}
-              className="text-[10px] p-1.5 bg-ops-panel-light rounded border-l-2 hover:bg-ops-panel transition-all duration-200 animate-fade-in"
+              className="text-[10px] p-1.5 bg-ops-panel-light rounded border-l-2 hover:bg-ops-panel transition-all duration-200"
               style={{
                 borderLeftColor: borderColor,
-                animationDelay: `${idx * 20}ms`,
               }}
             >
               <div className="flex items-start gap-1.5">

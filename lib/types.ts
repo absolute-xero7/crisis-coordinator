@@ -152,6 +152,7 @@ export interface SimulationState {
     logistics: LogisticsDecision | null;
     medical: MedicalDecision | null;
     communications: CommunicationsDecision | null;
+    commander: CommanderDecision | null;
   };
 
   // Analytics
@@ -183,12 +184,31 @@ export interface SimulationEvent {
 // ============================================================================
 
 export interface AgentDecision {
-  agentId: 'triage' | 'resource' | 'logistics' | 'medical' | 'communications';
+  agentId: 'triage' | 'resource' | 'logistics' | 'medical' | 'communications' | 'commander';
   timestamp: number;
   decision: any;
   reasoning: string;
   torontoContext: string[];
   confidence: number; // 0-1
+}
+
+// Agent conflict detection
+export interface AgentConflict {
+  id: string;
+  agents: [string, string]; // e.g., ['medical', 'logistics']
+  description: string;
+  resolution: string;
+  resolvedBy: 'commander' | 'rule';
+}
+
+// Commander summary synthesizing all agent outputs
+export interface CommanderSummary {
+  timestamp: number;
+  overallStatus: 'stable' | 'stressed' | 'critical';
+  keyDecisions: string[];
+  conflicts: AgentConflict[];
+  equityNotes: string[];
+  torontoContext: string[];
 }
 
 export interface TriageDecision extends AgentDecision {
@@ -250,6 +270,13 @@ export interface CommunicationsDecision extends AgentDecision {
       message: string;
       torontoSpecific: string[];
     }>;
+  };
+}
+
+export interface CommanderDecision extends AgentDecision {
+  agentId: 'commander';
+  decision: {
+    summary: CommanderSummary;
   };
 }
 

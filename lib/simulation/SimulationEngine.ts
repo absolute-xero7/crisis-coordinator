@@ -37,11 +37,11 @@ export class SimulationEngine {
   }
 
   /**
-   * Advance simulation by one step (10 seconds)
+   * Advance simulation by one step (1 second)
    */
   async step(): Promise<SimulationState> {
-    // Increment timeline (10 seconds per step)
-    this.state.timeline += 10;
+    // Increment timeline (1 second per step for realistic timer display)
+    this.state.timeline += 1;
 
     // 1. Check for scripted events
     this.processScriptedEvents();

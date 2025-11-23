@@ -2,24 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Toronto Emergency Operations Centre - Mission Control Aesthetic */
+/* Toronto Emergency Operations Centre - Refined Control Room Aesthetic */
 
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --ops-bg: #050816;
-  --ops-panel: #0B1220;
-  --ops-panel-light: #111827;
-  --ops-border: #1E293B;
+  --ops-bg: #0a0d11;
+  --ops-panel: #0f141c;
+  --ops-panel-light: #151c25;
+  --ops-border: #243042;
 
-  --severity-critical: #DC2626;
-  --severity-high: #F59E0B;
-  --severity-medium: #EAB308;
-  --severity-low: #3B82F6;
+  --accent-amber: #f5b75f;
+  --accent-mint: #7be0c3;
+  --accent-coral: #ef6c57;
+  --accent-ink: #c9d7f2;
 
-  --toronto-fire: #CC0000;
-  --toronto-police: #003A70;
-  --toronto-ems: #00563F;
+  --severity-critical: #f06767;
+  --severity-high: #f5b75f;
+  --severity-medium: #8bc6ff;
+  --severity-low: #7be0c3;
+
+  --toronto-fire: #d83a36;
+  --toronto-police: #1f4f8f;
+  --toronto-ems: #1f8f78;
 }
 
 * {
@@ -33,8 +38,12 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--ops-bg);
-  color: #E5E7EB;
-  font-family: 'Work Sans', sans-serif;
+  color: #e7edf5;
+  font-family: 'Manrope', sans-serif;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(245, 183, 95, 0.08), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(123, 224, 195, 0.08), transparent 28%),
+    linear-gradient(135deg, rgba(21, 28, 37, 0.85), rgba(10, 13, 17, 0.85));
 }
 
 body {
@@ -42,7 +51,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
 }
 
@@ -54,14 +63,16 @@ code, pre {
 
 .ops-panel {
   background: var(--ops-panel);
-  border: 1px solid var(--ops-border);
-  border-radius: 4px;
+  border: 1px solid rgba(36, 48, 66, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 
 .ops-panel-light {
   background: var(--ops-panel-light);
-  border: 1px solid var(--ops-border);
-  border-radius: 4px;
+  border: 1px solid rgba(36, 48, 66, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
 }
 
 .ops-border {
@@ -132,8 +143,8 @@ code, pre {
 .status-badge {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 11px;
+  border-radius: 999px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -207,13 +218,13 @@ code, pre {
 /* Buttons (Legacy - keeping for compatibility) */
 
 .btn-primary {
-  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-coral) 100%);
+  color: #0d1117;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 999px;
   border: none;
   font-weight: 600;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
@@ -221,25 +232,100 @@ code, pre {
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 24px rgba(239, 108, 87, 0.25);
 }
 
 .btn-secondary {
-  background: var(--ops-panel-light);
-  color: white;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7edf5;
   padding: 10px 20px;
-  border-radius: 4px;
-  border: 1px solid var(--ops-border);
+  border-radius: 999px;
+  border: 1px solid rgba(201, 215, 242, 0.2);
   font-weight: 600;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-secondary:hover {
-  background: #1F2937;
-  border-color: #374151;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(201, 215, 242, 0.35);
+}
+
+/* Modern button styles to reduce Tailwind sprawl */
+.btn-primary-enhanced {
+  background: linear-gradient(135deg, var(--accent-amber), var(--accent-coral));
+  color: #0d1117;
+  border: 1px solid rgba(239, 108, 87, 0.25);
+  border-radius: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+  box-shadow: 0 12px 30px rgba(239, 108, 87, 0.18);
+}
+
+.btn-primary-enhanced:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(239, 108, 87, 0.28);
+}
+
+.btn-secondary-enhanced {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7edf5;
+  border: 1px solid rgba(201, 215, 242, 0.25);
+  border-radius: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease, border-color 200ms ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.btn-secondary-enhanced:hover {
+  border-color: rgba(123, 224, 195, 0.5);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+  transform: translateY(-1px);
+}
+
+/* Card lift effects */
+.hover-lift {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+.hover-lift-strong {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.hover-lift-strong:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.36);
+}
+
+/* Gradient text shift */
+.hover-gradient-shift {
+  transition: background-position 300ms ease;
+  background-size: 200% 200%;
+}
+.hover-gradient-shift:hover {
+  background-position: 100% 0;
+}
+
+/* Shared chip style */
+.ops-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 215, 242, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  color: #e7edf5;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 /* Loading skeleton animations */
@@ -297,7 +383,7 @@ code, pre {
   font-family: 'JetBrains Mono', monospace;
   font-size: 24px;
   font-weight: 500;
-  color: #60A5FA;
+  color: var(--accent-amber);
   letter-spacing: 2px;
 }
 
@@ -308,8 +394,8 @@ code, pre {
 }
 
 .agent-card.active {
-  border-color: #3B82F6;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-amber);
+  box-shadow: 0 0 20px rgba(245, 183, 95, 0.35);
 }
 
 /* Map markers */

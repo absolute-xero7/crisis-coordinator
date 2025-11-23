@@ -41,6 +41,8 @@ export function buildTorontoContext(state: SimulationState): string {
 export function formatIncidentsForPrompt(incidents: Incident[]): string {
   return incidents
     .filter((i) => i.status !== 'resolved')
+    .sort((a, b) => b.severity - a.severity || b.peopleAffected - a.peopleAffected)
+    .slice(0, 6) // keep prompt lean to avoid rate limits
     .map((i) => {
       const address = i.location.address || `${i.location.lat.toFixed(4)}, ${i.location.lng.toFixed(4)}`;
       const neighborhood = i.location.neighborhood ? ` (${i.location.neighborhood})` : '';
@@ -64,6 +66,7 @@ Assigned Resources: ${i.assignedResources.length > 0 ? i.assignedResources.join(
  */
 export function formatResourcesForPrompt(resources: Resource[]): string {
   return resources
+    .slice(0, 8) // limit to top resources to stay within token budget
     .map((r) => {
       const location = r.location ? `${r.location.lat.toFixed(4)}, ${r.location.lng.toFixed(4)}` : 'Unknown';
       return `ID: ${r.id} | Name: ${r.name} | Type: ${r.type} | Status: ${r.status} | Location: ${location} | Assigned: ${r.assignedTo || 'None'}`;
@@ -110,9 +113,17 @@ CONSIDERATIONS:
 - Resource availability and specialization
 - Current response status (are resources already assigned?)
 
+⚠️ EQUITY RULES (MANDATORY):
+- ALWAYS prioritize human life over property damage
+- Incidents with casualties or trapped people MUST rank higher than property-only incidents
+- Mass-casualty events and medical emergencies receive top priority regardless of location
+- Deprioritize property-only incidents (building alarms with no injuries, structural damage without casualties)
+- Consider vulnerable populations (elderly, children, medical conditions) as higher priority
+
 INSTRUCTIONS:
 Prioritize incidents for response. Assign priority scores from 1-10 (10 = highest priority).
 Consider both immediate life threats and strategic resource deployment.
+Include equity reasoning in your rationale (e.g., "human life prioritized over property").
 
 RESPOND IN VALID JSON ONLY:
 {

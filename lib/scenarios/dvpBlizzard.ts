@@ -103,7 +103,7 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
     },
     {
       id: 'TOR-INC-107',
-      type: 'flood',
+      type: 'traffic',
       location: {
         lat: 43.6772,
         lng: -79.3608,
@@ -219,12 +219,48 @@ export const dvpBlizzardScenario: ScenarioDefinition = {
       },
     },
     {
+      id: 'evt-warming-centre-overflow',
+      triggerTime: 1800, // T+30:00
+      type: 'spawn_incident',
+      payload: {
+        id: 'TOR-INC-114',
+        type: 'infrastructure',
+        location: {
+          lat: 43.7015,
+          lng: -79.3448,
+          address: 'Thorncliffe Park Community Centre',
+        },
+        severity: 3,
+        peopleAffected: 200,
+        details:
+          'Warming centre over capacity; 200 people outside in -25°C wind chill. Additional space and transport needed.',
+      },
+    },
+    {
       id: 'evt-hospital-full',
       triggerTime: 3600, // T+60:00
       type: 'hospital_capacity',
       payload: {
         hospitalId: 'toronto-general',
         capacityUsed: 54, // 90%
+      },
+    },
+    {
+      id: 'evt-st-mikes-divert',
+      triggerTime: 3000, // T+50:00
+      type: 'hospital_capacity',
+      payload: {
+        hospitalId: 'st-michaels',
+        capacityUsed: 43, // ~95%
+      },
+    },
+    {
+      id: 'evt-transit-closure',
+      triggerTime: 1500, // T+25:00
+      type: 'road_closure',
+      payload: {
+        description:
+          'TTC surface routes suspended along Eglinton and Don Mills due to whiteout; expect detours and delays for EMS access.',
       },
     },
     {

@@ -13,8 +13,8 @@ export class TriageAgent {
       // Build prompt with Toronto context
       const prompt = buildTriageAgentPrompt(state);
 
-      // Call LLM
-      const response = await callAgentLLM('triage', prompt, 2000);
+      // Call LLM (800 tokens: priorityQueue ~400 + reasoning/context ~300)
+      const response = await callAgentLLM('triage', prompt, 800);
 
       // Validate response structure
       if (!response.priorityQueue || !Array.isArray(response.priorityQueue)) {

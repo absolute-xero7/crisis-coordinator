@@ -14,7 +14,7 @@ export class CommunicationsAgent {
   ): Promise<CommunicationsDecision> {
     try {
       const prompt = buildCommunicationsAgentPrompt(state, topIncidents);
-      const response = await callAgentLLM('communications', prompt, 2000);
+      const response = await callAgentLLM('communications', prompt, 800);
 
       if (!response.publicAlerts) {
         throw new Error('Invalid communications response: missing publicAlerts');

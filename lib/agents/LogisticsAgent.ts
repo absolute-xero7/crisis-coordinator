@@ -15,7 +15,8 @@ export class LogisticsAgent {
   ): Promise<LogisticsDecision> {
     try {
       const prompt = buildLogisticsAgentPrompt(state);
-      const response = await callAgentLLM('logistics', prompt, 2500);
+      // 900 tokens: hospitalRouting can be verbose with shelter assignments
+      const response = await callAgentLLM('logistics', prompt, 900);
 
       if (!response.hospitalRouting) {
         throw new Error('Invalid logistics response: missing hospitalRouting');

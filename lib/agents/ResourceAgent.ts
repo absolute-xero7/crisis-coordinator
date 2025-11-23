@@ -19,8 +19,8 @@ export class ResourceAgent {
         triageDecision.decision.priorityQueue
       );
 
-      // Call LLM
-      const response = await callAgentLLM('resource', prompt, 2500);
+      // Call LLM (700 tokens: assignments ~350 + reasoning/context ~250)
+      const response = await callAgentLLM('resource', prompt, 700);
 
       // Validate response
       if (!response.assignments || !Array.isArray(response.assignments)) {

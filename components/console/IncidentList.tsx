@@ -12,8 +12,8 @@ export default function IncidentList({ incidents }: IncidentListProps) {
   return (
     <div className="ops-panel p-3 flex flex-col h-full bg-gradient-to-br from-ops-panel via-ops-panel to-ops-panel-light">
       <div className="flex items-center justify-between mb-2 flex-shrink-0">
-        <h2 className="text-sm font-display font-semibold text-blue-300">Incidents</h2>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-mono">
+        <h2 className="text-sm font-display font-semibold text-accent-amber">Incidents</h2>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-coral/10 border border-accent-coral/30 text-accent-coral font-mono">
           {activeIncidents.length} active
         </span>
       </div>
@@ -32,8 +32,7 @@ export default function IncidentList({ incidents }: IncidentListProps) {
           return (
             <div
               key={incident.id}
-              className="ops-panel-light p-2 rounded-lg hover-lift transition-all duration-200 border border-transparent hover:border-red-500/30 animate-fade-in"
-              style={{ animationDelay: `${idx * 30}ms` }}
+              className="ops-panel-light p-2 hover-lift transition-all duration-200 border border-transparent hover:border-accent-amber/40"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-1">
@@ -44,7 +43,7 @@ export default function IncidentList({ incidents }: IncidentListProps) {
                       backgroundColor: `var(--severity-${severityLevel})`,
                     }}
                   ></span>
-                  <span className="font-mono text-[10px] font-semibold text-blue-300">{incident.id}</span>
+                  <span className="font-mono text-[10px] font-semibold text-accent-amber">{incident.id}</span>
                 </div>
                 <span className={`status-badge status-${incident.status} text-[9px] px-1.5 py-0.5`}>
                   {incident.status}

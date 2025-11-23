@@ -11,7 +11,7 @@ export class MedicalAgent {
   static async makeDecision(state: SimulationState): Promise<MedicalDecision> {
     try {
       const prompt = buildMedicalAgentPrompt(state);
-      const response = await callAgentLLM('medical', prompt, 1500);
+      const response = await callAgentLLM('medical', prompt, 600);
 
       if (!response.alerts) {
         throw new Error('Invalid medical response: missing alerts');
