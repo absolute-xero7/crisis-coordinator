@@ -1,313 +1,215 @@
-# 🍁 CrisisCoordinator - Toronto Emergency Response System
+# CrisisCoordinator
 
-**Multi-Agent AI System for Emergency Response Simulation and Training**
+**Multi-agent AI command center for Toronto emergency response training**
 
-Built for Toronto Emergency Operations Centre. Demonstrating how AI can support emergency coordinators with transparent, explainable decisions during crisis scenarios.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
+![Claude AI](https://img.shields.io/badge/Claude-Sonnet-orange?logo=anthropic)
+![MapLibre](https://img.shields.io/badge/MapLibre-GL-green?logo=maplibre)
 
----
-
-## 🚨 What is CrisisCoordinator?
-
-CrisisCoordinator is an interactive simulation platform that uses **5 specialized AI agents** to coordinate emergency response in Toronto-specific crisis scenarios. Each agent makes decisions with full transparency and Toronto-aware context.
-
-### Key Features
-
-- **🧠 5 Specialized AI Agents:**
-  - **Triage Agent**: Prioritizes incidents by severity, people affected, and Toronto geography
-  - **Resource Agent**: Assigns Toronto Fire Services, Paramedic Services, and Police units
-  - **Logistics Agent**: Routes patients to Toronto hospitals, manages shelter assignments
-  - **Medical Agent**: Monitors hospital capacity across Toronto's 5 major hospitals
-  - **Communications Agent**: Generates Toronto-specific public alerts
-
-- **🍁 Toronto-Specific Data:**
-  - 5 real Toronto hospitals (Toronto General, St. Michael's, Mount Sinai, Sunnybrook, North York General)
-  - Real Toronto geography (PATH system, DVP, Union Station, Financial District)
-  - TTC integration (Line 1, 2, subway stations)
-  - Toronto streets (King, Bay, Yonge, University, Spadina)
-  - Toronto Fire Services, Paramedic Services, Police Service units
-
-- **💡 Explainable AI:**
-  - Every decision includes detailed reasoning
-  - Toronto context highlighted (hospital capacity, TTC status, street names)
-  - Transparent tradeoffs explained
-  - Real-time agent thinking visualization
-
-- **🎮 Interactive Simulation:**
-  - Real-time map visualization with Toronto street labels
-  - Live resource tracking (TFS, EMS, TPS units)
-  - Play/pause/step controls
-  - Adjustable simulation speed (1x to 10x)
-  - Comprehensive event timeline
+> *"It's Monday morning, 8:30 AM. A water main bursts in Toronto's PATH network. 2,000 commuters are trapped underground. You have 50 units to deploy, 5 hospitals to manage, and 15 minutes before panic sets in. The cognitive load is impossible for one human."*
 
 ---
 
-## 🌆 Three Built-In Toronto Scenarios
+## The Problem
 
-### 1. PATH System Flood & Union Station Emergency
-**Duration:** 75 minutes | **Location:** Downtown Financial District
+Emergency coordinators face **impossible cognitive loads** during multi-incident crises:
+- Dozens of simultaneous decisions across fire, EMS, police, hospitals
+- Conflicting priorities between agencies (speed vs. safety, capacity vs. proximity)
+- No time to verify if decisions are equitable or explain reasoning under pressure
+- Traditional dispatch systems are reactive, not predictive
 
-A water main ruptures at King & Bay during morning rush hour, flooding the PATH underground system. 2,000+ commuters trapped underground. Union Station evacuation. TTC subway disruption.
-
-**Key Challenges:**
-- Mass underground evacuation
-- Water rescue in confined spaces
-- Hospital capacity management (St. Michael's at 85%)
-- Traffic gridlock on King Street
-- TTC Line 1 suspension
+**CrisisCoordinator** demonstrates how AI agents can assist—not replace—human coordinators by surfacing conflicts, explaining reasoning, and ensuring equitable resource allocation.
 
 ---
 
-### 2. DVP Winter Blizzard + Multi-Vehicle Pileup
-**Duration:** 90 minutes | **Location:** Don Valley Parkway & Eastern Toronto
+## What Makes This Different
 
-Severe winter storm causes 40-vehicle pileup on DVP during evening rush hour. -25°C wind chill. Multiple cold weather emergencies. Hospital overload.
+### Human-Centered AI Design
+- **Transparent reasoning**: Every agent decision shows the "why," not just the "what"
+- **Conflict surfacing**: When agents disagree, the system shows the conflict AND how it was resolved
+- **Equity checks**: Explicit verification that vulnerable populations aren't deprioritized
+- **Human override**: Coordinators can pause, reject, or modify any recommendation
 
-**Key Challenges:**
-- Mass casualty response in extreme cold
-- Hypothermia and frostbite risks
-- Hospital system stress (Sunnybrook at 95%)
-- Stranded TTC bus with 35 passengers
-- Carbon monoxide poisoning from improper heating
+### Real Toronto Infrastructure
+- **5 real hospitals**: St. Michael's, Toronto General, Sunnybrook, Mount Sinai, North York General
+- **Actual geography**: PATH system, DVP, Billy Bishop, TTC corridors
+- **Toronto agencies**: TFS, TPS, Toronto Paramedic Services protocols
 
----
+### Multi-Agent Coordination
+Six specialized AI agents that collaborate and sometimes conflict:
 
-### 3. Billy Bishop Airport Incident + Waterfront Emergency
-**Duration:** 60 minutes | **Location:** Toronto Waterfront
-
-Small aircraft crashes into Lake Ontario near Billy Bishop Airport. Fuel fire on water. Multiple vessel collision. Mass waterfront evacuation during summer festival.
-
-**Key Challenges:**
-- Marine rescue coordination
-- Aviation fuel fire containment
-- Mass evacuation (5,000+ people at Harbourfront)
-- Hypothermia from cold water (12°C)
-- Multi-agency coordination (TFS Marine Unit, TPS Marine, Coast Guard)
-
----
-
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS (Mission control aesthetic)
-- **AI:** Anthropic Claude 3.5 Sonnet (via API)
-- **State Management:** React hooks
-- **Deployment:** Vercel
+| Agent | Role | Example Decision |
+|-------|------|------------------|
+| **Triage** | Prioritize incidents by severity + impact | "PATH flood Priority #1: 2,000 trapped vs. Ritz alarm: property only" |
+| **Resource** | Dispatch units to incidents | "TFS water rescue to PATH, staging ambulances at King/Bay" |
+| **Logistics** | Route planning + hospital selection | "Bay St blocked at 90%—rerouting via University Ave" |
+| **Medical** | Hospital capacity monitoring | "St. Michael's at 93%—diverting non-critical cases" |
+| **Communications** | Public alerts + agency coordination | "URGENT: PATH evacuation via Toronto Emergency Alert" |
+| **Commander** | Resolve conflicts + synthesize decisions | "Conflict resolved: ETA reduced 8 minutes via alternate route" |
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Anthropic API key (Claude 3.5 Sonnet)
-- Supabase project (free tier is fine) with URL + anon + service role keys
-
-### Installation
-
-1. **Clone the repository**
+## Quick Start
 
 ```bash
-git clone https://github.com/absolute-xero7/crisis-coordinator.git
-cd crisis-coordinator
-```
-
-2. **Install dependencies**
-
-```bash
+# Install dependencies
 npm install
-```
 
-3. **Set up environment variables**
-
-Copy the example file and fill in your values:
-
-```bash
+# Set up environment (API key required for Live mode only)
 cp .env.local.example .env.local
-```
+# Add ANTHROPIC_API_KEY if using Live mode
 
-Update `.env.local` with:
-
-```bash
-ANTHROPIC_API_KEY=sk-ant-...
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=service-role-key   # server-side only
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=public-anon-key
-```
-
-> **Security note:** Keep `.env.local` out of version control. The service role key is required for local server-side routes only and never sent to the browser.
-
-4. **Provision Supabase schema**
-
-Use the SQL editor (or CLI) to apply `supabase/schema.sql` so the `scenarios`, `simulation_runs`, and `simulation_events` tables exist:
-
-```bash
-supabase db push --file supabase/schema.sql
-# or paste the SQL file contents in the Supabase dashboard
-```
-
-Need a step-by-step walkthrough? See [`docs/SETUP.md`](docs/SETUP.md) for screenshots, troubleshooting tips, and verification steps.
-
-4. **Run development server**
-
-```bash
+# Run development server
 npm run dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+### Environment Variables
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Live mode only | Claude API key for real-time agent decisions |
+| `NEXT_PUBLIC_MAPTILER_KEY` | Optional | MapTiler key for enhanced basemap |
+| `SUPABASE_URL` / `SUPABASE_ANON_KEY` | Optional | For custom scenario storage |
 
-5. **Build for production**
+---
 
-```bash
-npm run build
-npm start
+## Demo Mode vs Live Mode
+
+| Feature | Demo Mode (Default) | Live Mode |
+|---------|---------------------|-----------|
+| Agent decisions | Instant, cached responses | Real-time Claude API calls |
+| Network required | No | Yes |
+| Rate limits | None | API throttled |
+| Best for | Presentations, offline use | Testing AI reasoning |
+
+**Tip**: Use Demo Mode for presentations. It's instant, reliable, and showcases all features without network dependencies.
+
+---
+
+## Built-in Toronto Scenarios
+
+### 1. PATH System Flood & Union Station
+- Water main burst traps 2,000+ commuters underground
+- TTC Line 1 suspended, hospital surge, gas leak cascade
+- **Key conflict**: Bay St gridlock vs. ambulance extraction timing
+
+### 2. DVP Winter Blizzard
+- 40-vehicle pileup in -25°C wind chill
+- CO poisoning, power outages, hypothermia emergencies
+- **Key conflict**: DVP blocked vs. cardiac arrest transport
+
+### 3. Billy Bishop Waterfront Emergency
+- Aircraft crash + fuel fire + mass festival evacuation
+- Marine rescue coordination with Coast Guard
+- **Key conflict**: No land access to offshore patients
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Console UI (Next.js)                  │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────┐ │
+│  │   Map   │  │ Agents  │  │Incidents│  │  Timeline   │ │
+│  │(MapLibre│  │  Panel  │  │  List   │  │  EventLog   │ │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────────┘ │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────┐
+│              Simulation Engine (lib/simulation)          │
+│  • Timeline advancement    • Resource dispatch           │
+│  • Incident lifecycle      • Hospital routing            │
+│  • Scripted event triggers • State management            │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────┐
+│                 Agent System (lib/agents)                │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐           │
+│  │Triage  │→│Resource│→│Logistics│→│Medical │           │
+│  └────────┘ └────────┘ └────────┘ └────────┘           │
+│       │          │          │          │                │
+│       └──────────┴──────────┴──────────┘                │
+│                      ↓                                   │
+│              ┌─────────────┐                            │
+│              │  Commander  │ ← Conflict Resolution      │
+│              └─────────────┘                            │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+         ┌────────────┴────────────┐
+         │                         │
+    Demo Mode                 Live Mode
+    (Cached)              (Claude API)
 ```
 
 ---
 
-## 📖 Usage
+## Key Files
 
-### Running a Simulation
-
-1. Navigate to **Operations Console** from the landing page
-2. Select a scenario from the dropdown (PATH Flooding, DVP Blizzard, Billy Bishop)
-3. Click **Play** to start the simulation
-4. Watch agents make decisions every 60 seconds
-5. Click on agent cards to view detailed reasoning
-6. Monitor incidents, resources, and events in real-time
-
-### Understanding Agent Decisions
-
-- **Triage Priority Queue**: See which incidents are prioritized and why
-- **Resource Assignments**: View which TFS/EMS/TPS units are assigned to each incident
-- **Hospital Routing**: Understand why patients are routed to specific Toronto hospitals
-- **Medical Alerts**: Monitor hospital capacity warnings
-- **Public Communications**: Read Toronto-specific public alerts
+| Path | Description |
+|------|-------------|
+| `app/console/page.tsx` | Main console UI, agent triggers, demo toggle |
+| `components/console/AgentPanel.tsx` | Agent cards with reasoning display |
+| `lib/simulation/SimulationEngine.ts` | Core simulation loop |
+| `lib/agents/demoDecisions.ts` | Scenario-specific cached agent responses |
+| `lib/agents/agentPrompts.ts` | LLM prompts for each agent |
+| `lib/scenarios/*.ts` | Toronto scenario definitions |
 
 ---
 
-## 🗺️ System Architecture
+## Equity & Fairness
+
+CrisisCoordinator explicitly surfaces equity considerations:
 
 ```
-┌─────────────────────────────────────────────┐
-│           NEXT.JS FRONTEND                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
-│  │ Landing  │  │ Console  │  │ Builder  │  │
-│  │  Page    │  │  (Main)  │  │ (Future) │  │
-│  └──────────┘  └──────────┘  └──────────┘  │
-└──────────────────┬──────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────┐
-│       SIMULATION ENGINE (Client-Side)       │
-│  ┌────────────────────────────────────┐    │
-│  │  SimulationState                    │    │
-│  │  - Incidents, Resources, Hospitals  │    │
-│  │  - Timeline, Events, Stats          │    │
-│  └────────────────────────────────────┘    │
-└──────────────────┬──────────────────────────┘
-                   │
-┌──────────────────▼──────────────────────────┐
-│          5 AI AGENTS (Claude API)           │
-│  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──┐ │
-│  │Triage│ │Resrc.│ │Logic.│ │Medic.│ │Com│ │
-│  └──────┘ └──────┘ └──────┘ └──────┘ └──┘ │
-└─────────────────────────────────────────────┘
+✅ Human vulnerability prioritized over property value
+✅ PATH evacuation (2,000 people) ranked above Ritz-Carlton alarm (property only)
+✅ Vulnerable populations (elderly, medical conditions) receiving priority transport
+✅ Mass-casualty incidents ranked regardless of neighborhood wealth
 ```
 
----
-
-## ⚖️ Ethical Considerations
-
-**This is a training prototype, not production software.**
-
-### ✅ Appropriate Uses:
-- Toronto Fire Services training exercises
-- Emergency Management Ontario scenario planning
-- City of Toronto preparedness drills
-- Research on AI for public safety
-- Educational demonstrations
-
-### ❌ NOT Ready For:
-- Live 911 dispatch
-- Real emergency coordination
-- Decisions without human oversight
-- Production deployment without extensive validation
-
-### Requirements for Deployment:
-- Integration with Toronto CAD systems
-- Validation with Toronto emergency services
-- Community consultation (especially vulnerable neighborhoods)
-- Multilingual support for Toronto's diverse population
-- Compliance with Ontario privacy and emergency management regulations
+This isn't just a checkbox—it's visible in the Commander panel so coordinators can verify and audit every decision.
 
 ---
 
-## 🍁 Why Toronto?
+## Future Roadmap
 
-Toronto presents unique emergency response challenges:
-
-- **PATH System**: 30km underground network serving 200,000+ daily
-- **Extreme Weather**: -30°C winters, severe storms, rapid temperature swings
-- **High Density**: 2.9 million residents, 6.4 million in GTA
-- **Complex Infrastructure**: DVP, Gardiner, TTC, GO Transit, Billy Bishop Airport
-- **Waterfront**: Lake Ontario, Toronto Islands, marine emergencies
-- **Diverse Neighborhoods**: Different challenges across Scarborough, North York, Etobicoke
-
-CrisisCoordinator demonstrates how multi-agent AI could be adapted to any city's unique geography and infrastructure.
+- [ ] **Scenario Builder**: Visual editor for custom emergency drills
+- [ ] **Multi-city support**: Upload custom geography + infrastructure
+- [ ] **After-action reports**: Exportable timeline + decision audit trail
+- [ ] **Voice interface**: Hands-free agent queries during simulation
+- [ ] **Real data integration**: Live traffic, weather, hospital capacity feeds
 
 ---
 
-## 📊 Project Stats
+## Tech Stack
 
-- **Lines of Code:** ~8,000+
-- **Components:** 20+
-- **Toronto Data Points:** 100+ (hospitals, streets, neighborhoods, stations)
-- **Scenarios:** 3 built-in (+ custom scenario builder coming)
-- **AI Agents:** 5 specialized
-- **Build Time:** ~30 hours
-
----
-
-## 🤝 Contributing
-
-This project was built for a hackathon demonstration. Future enhancements could include:
-
-- **Scenario Builder UI** (architected but not implemented)
-- **Historical replay** of past simulations
-- **Multi-city support** (Montreal, Vancouver, etc.)
-- **Real-time data integration** (weather, traffic, hospital capacity APIs)
-- **VR/AR visualization** for training centers
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **Mapping**: MapLibre GL JS with MapTiler
+- **AI**: Claude (Anthropic) via API with parallel agent execution
+- **State**: React hooks + custom simulation engine
+- **Styling**: Custom "control room" dark theme
 
 ---
 
-## 📜 License
+## Security & Privacy
 
-MIT License - See LICENSE file for details
-
----
-
-## 🙏 Acknowledgments
-
-- **Toronto Emergency Services**: For inspiring this project
-- **Anthropic**: For Claude AI API
-- **Next.js Team**: For the incredible framework
-- **Toronto Open Data**: For geographic and infrastructure data
+- All Claude API calls are server-side (keys never exposed to browser)
+- No real emergency data—all scenarios are simulated
+- Supabase integration is optional; built-in scenarios run fully local
+- Designed as a **training tool**, not production dispatch software
 
 ---
 
-## 📧 Contact
+## License
 
-**For Toronto Emergency Services:**
-
-We'd love to demo CrisisCoordinator for your training division and get feedback from real Toronto coordinators.
-
-**GitHub:** [absolute-xero7/crisis-coordinator](https://github.com/absolute-xero7/crisis-coordinator)
+MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-**Built with ❤️ for Toronto**
-
-*Because when disaster strikes our city, every decision matters. And every decision deserves an explanation.* 🍁🚨
+<p align="center">
+  <strong>CrisisCoordinator</strong><br>
+  <em>Turning chaos into clarity with transparent, equitable AI coordination</em>
+</p>
